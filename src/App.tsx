@@ -1,25 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from 'react';
 import './App.css'
+import { PortalExample1 } from './PortalExample1';
+import { PortalExample2 } from './PortalExample2';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [, setCount] = useState(0);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1>React Portal via Ref</h1>
+      <div className="portals">
+        <PortalExample1 />
+        <PortalExample2 />
       </div>
-      <h1>Vite + React</h1>
+
+      <div className="explainer">
+        <p>Note that <i>Portal 1</i> is empty after the first render. This happens because the ref is not yet available when <code>createPortal()</code> is called. The ref will get set after the DOM mutations are done.</p>
+        <p><i>Portal 2</i> uses <code>useLayoutEffect()</code> to rerender after the dom mutations. This time the ref is ready and the portal works as expected.</p>
+      </div>
+
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+          Rerender
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR

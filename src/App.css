@@ -11,17 +11,53 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.portals {
+  display: flex;
+  gap: 1rem;
+  counter-reset: portal;
+}
+
+.portal_container {
+  counter-increment: portal;
+  border-radius: .5rem;
+  background: gainsboro;
+  flex: 1;
+  padding: 1em;
+  position: relative;
+  font-weight: bold;
+  min-height: 1rem;
+}
+
+.portal_container::before {
+  content: "Portal " counter(portal);
+  font-weight: normal;
+  font-size: .75em;
+  color: #00000044;
+  display: block;
+  position: absolute;
+  top: .25rem;
+  left: .5rem;
+}
+
+.explainer {
+  max-width: 30rem;
+  text-align: left;
 }
 
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
