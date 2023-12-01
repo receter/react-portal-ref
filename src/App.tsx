@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css'
 import { PortalExample1 } from './PortalExample1';
 import { PortalExample2 } from './PortalExample2';
+import { PortalExample3 } from './PortalExample3';
 
 function App() {
   const [, setCount] = useState(0);
@@ -12,6 +13,7 @@ function App() {
       <div className="portals">
         <PortalExample1 />
         <PortalExample2 />
+        <PortalExample3 />
       </div>
 
       <div className="explainer">

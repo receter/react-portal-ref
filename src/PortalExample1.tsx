@@ -3,10 +3,10 @@ import { createPortal } from "react-dom";
 
 export function PortalExample1() {
 
-  const refPortalContainer1 = useRef<HTMLDivElement>(null);
+  const refPortalContainer = useRef<HTMLDivElement>(null);
 
   return <>
-    <div className="portal_container" ref={refPortalContainer1} />
-    {refPortalContainer1.current !== null && createPortal("Travaller1", refPortalContainer1.current)}
+    <div className="portal_container" ref={refPortalContainer} />
+    {refPortalContainer.current !== null && createPortal("Traveller 1", refPortalContainer.current)}
   </>
 }
