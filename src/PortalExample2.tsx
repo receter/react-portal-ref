@@ -1,16 +1,16 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 export function PortalExample2() {
-  const refPortalContainer = useRef<HTMLDivElement>(null);
+  const refPortalDomNode = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setIsMounted(true);
   }, []);
 
   return <>
-    <div className="portal_container" ref={refPortalContainer} />
-    {isMounted && refPortalContainer.current && createPortal("Traveller 2", refPortalContainer.current)}
+    <div className="portal_container" ref={refPortalDomNode} />
+    {isMounted && refPortalDomNode.current && createPortal("Traveller 2", refPortalDomNode.current)}
   </>
 }

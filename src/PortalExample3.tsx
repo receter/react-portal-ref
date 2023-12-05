@@ -1,48 +1,47 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 export function PortalExample3() {
-  const refPortalContainerA = useRef<HTMLDivElement>(null);
-  const refPortalContainerB = useRef<HTMLDivElement>(null);
-  const [currentPortalContainer, setCurrentPortalContainer] = useState(refPortalContainerA);
+  const refPortalNodeA = useRef<HTMLDivElement>(null);
+  const refPortalNodeB = useRef<HTMLDivElement>(null);
+  const [currentPortalNode, setCurrentPortalNode] = useState(refPortalNodeA);
 
   return <>
-    <Portal refPortalContainer={currentPortalContainer}>Traveller 3</Portal>
+    <Portal refPortalNode={currentPortalNode}>Traveller 3</Portal>
     <div
       className="portal_container"
-      ref={refPortalContainerA}
-      onClick={() => setCurrentPortalContainer(refPortalContainerA)}
+      ref={refPortalNodeA}
+      onClick={() => setCurrentPortalNode(refPortalNodeA)}
     />
     <div
       className="portal_container"
-      ref={refPortalContainerB}
-      onClick={() => setCurrentPortalContainer(refPortalContainerB)}
+      ref={refPortalNodeB}
+      onClick={() => setCurrentPortalNode(refPortalNodeB)}
     />
   </>
 }
 
 function Portal({
-  refPortalContainer,
+  refPortalNode,
   children
 }: {
-  refPortalContainer: React.RefObject<HTMLDivElement>,
+  refPortalNode: React.RefObject<HTMLDivElement>,
   children: React.ReactNode
 }) {
   const refPortalCreated = useRef(false);
+  const [, forceUpdate] = useReducer(x => x + 1, 0);
 
-  const [, setRerenderedForPortalRefNotToBeNull] = useState(0);
-
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (refPortalCreated.current === false) {
-      setRerenderedForPortalRefNotToBeNull((v) => v + 1);
+      forceUpdate();
     }
-  }, [refPortalCreated, refPortalContainer]);
+  }, [refPortalNode]);
 
-  if (refPortalContainer.current === null) {
+  if (refPortalNode.current === null) {
     refPortalCreated.current = false;
     return null;
   } else {
     refPortalCreated.current = true;
-    return createPortal(children, refPortalContainer.current);
+    return createPortal(children, refPortalNode.current);
   }
 }
